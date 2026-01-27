@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_Rifqi.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Database Rawat Inap</title>
+</head>
+<body>
+    <header class="linkRifqi"><a href="/pasien">Data Pasien</a></header>
+
+        <div>
+            <center>
+                <center><h2>Daftar Data Transaksi</h2></center>
+                <form action="/" method="post">
+                    <table class="hasilRifqi">
+                        <tr>
+                            <th>ID Transaksi</th>
+                            <th>ID Pasien</th>
+                            <th>ID Rawat</th>
+                            <th>Nama Pasien</th>
+                            <th>Total Biaya</th>
+                            <th>Status Pembayaran</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            
+                        </tr>
+                        {% if transaksi %}
+                            {% for s in transaksi %}
+                            <tr style="width: 15px;">
+                                <td>{{s.id_transaksi}}</td>
+                                <td>{{s.id_pasien}}</td>
+                                <td>{{s.id_rawat}}</td>
+                                <td>{{s.nama}}</td>
+                                <td>{{s.total_biaya}}</td>
+                                <td>{{s.status_pembayaran}}</td>
+                                <td>{{s.tgl}}</td>
+                                <td style="display: inline-block; padding-top: 10px; padding-bottom: 40px;">
+                                    <a href="{{ url_for('edit_transaksi', id_transaksi=s.id_transaksi) }}" class="Editrifqi" style="width: 2px;">
+                                        <i class="fa-solid fa-user-pen"></i>
+                                    </a>
+                                    <a href="{{ url_for('hapus_transaksi', id_transaksi=s.id_transaksi) }}" onclick="return confirm('Yakin hapus?')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
+                        </table>
+
+                        <table>
+                            <div class="linkRifqi">
+                                <a href="{{ url_for('input_data') }}"><i class="fa-solid fa-file-circle-plus"></i> Tambah data</a>
+                            </div>
+                    </table></center>
+            </form>
+    
+    
+</body>
+</html>

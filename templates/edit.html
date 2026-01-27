@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<div class="form-container">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_Rifqi.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<center>    
+    <form  action="{{ url_for ('edit_transaksi', id_transaksi=transaksi.id_transaksi) }}" method="POST">
+        <div class="formBoxRifqi">
+            <h2>Edit Data Transaksi</h2><br><br>
+            <label for="id_transaksi">ID Transaksi:</label>
+            <input type="text" name="id_transaksi_baru" value="{{ transaksi.id_transaksi }}" readonly>
+            <label for="id_pasien ">ID Pasien:</label>
+            <input type="text" name="id_pasien" value="{{ transaksi.id_pasien  }}" required>
+            <label for="total_biaya">Total Biaya:</label>
+            <input type="text" name="total_biaya" value="{{ transaksi.total_biaya }}" required>   
+            <label>Status Pembayaran:</label>             
+                <select name="status_pembayaran" required>
+                    <option value="Terbayar" {% if transaksi.status_pembayaran == "Terbayar" %}selected{% endif %}>Terbayar</option>
+                    <option value="Belum Terbayar" {% if transaksi.status_pembayaran == "Belum Terbayar" %}selected{% endif %}>Belum Terbayar</option>
+                </select>
+            <label for="tgl">Tanggal:</label>
+            <input type="datetime" name="tgl" value="{{ transaksi.tgl }}" required>
+        </div>
+
+        <button type="submit" class="btnRifqi"><i class="fa-solid fa-floppy-disk"></i> Simpan perubahan</button>
+    </form>
+
+        <table>
+            <div class="linkRifqi">
+                <a href="{{ url_for('datatransaksi') }}"><i class="fa-solid fa-left-long"></i> Kembbali</a>
+            </div>
+        </table></center>
+    
+</body>
+</html>
