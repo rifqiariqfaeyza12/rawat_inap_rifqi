@@ -10,6 +10,7 @@
 <body>
     
 
+<<<<<<< HEAD
     <center>
         <h2>Daftar Data Pasien</h2>
         <div class="container-tabel">
@@ -40,6 +41,41 @@
             </div>
         </div>
     </center>
+=======
+        <div>
+            <center>
+                <center><h2>Daftar Data Pasien</h2></center>
+                <form action="/pasien" method="post">
+                    <table class="hasilRifqi">
+                        <tr>
+                            <th>ID Pasien</th>
+                            <th>Nama Pasien</th>
+                            <th>Alamat</th>
+                            <th>Kontak</th>
+                            
+                        </tr>
+                        {% if pasien %}
+                            {% for d in pasien %}
+                            <tr style="width: 15px;">
+                                <td>{{d.id_pasien}}</td>
+                                <td>{{d.nama}}</td>
+                                <td>{{d.alamat}}</td>
+                                <td>{{d.kontak}}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr><td colspan="4" style="text-align:center">Data tidak ditemukan</td></tr>
+                        {% endif %}
+                        </table>
+
+                        <table>
+                            <div class="linkRifqi">
+                                <a href="/cetak"><i class="fa-solid fa-print"></i></i> Cetak Data</a>
+                                <a href="/"><i class="fa-solid fa-arrow-left"></i></i> Kembali ke transaksi</a>
+                            </div>
+                    </table></center>
+            </form>
+>>>>>>> 0e79eb55cc2edfc29f5342f91949cfc69e03c107
     
     
 </body>
