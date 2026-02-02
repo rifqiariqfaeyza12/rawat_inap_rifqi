@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_Rifqi.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Database Rawat Inap</title>
+</head>
+<body>
+    <header class="linkRifqi"><a href="/pasien">Data Pasien</a></header>
+
+    <center>
+        <h2>Daftar Data Transaksi</h2>
+        <div class="container-tabel">
+            <table class="hasilRifqi">
+                <thead>
+                    <tr>
+                        <th>ID Transaksi</th>
+                        <th>ID Pasien</th>
+                        <th>ID Rawat</th>
+                        <th>Nama Pasien</th>
+                        <th>Total Biaya</th>
+                        <th>Status Pembayaran</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if transaksi %}
+                        {% for s in transaksi %}
+                        <tr>
+                            <td><strong>{{s.id_transaksi}}</strong></td>
+                            <td>{{s.id_pasien}}</td>
+                            <td>{{s.id_rawat}}</td>
+                            <td>{{s.nama}}</td>
+                            <td>Rp {{ "{:,.0f}".format(s.total_biaya) }}</td>
+                            <td>
+                                <span class="badge {{ 'paid' if s.status_pembayaran == 'Terbayar' else 'unpaid' }}">
+                                    {{s.status_pembayaran}}
+                                </span>
+                            </td>
+                            <td>{{s.tgl}}</td>
+                            <td class="aksi-kolom">
+                                <a href="{{ url_for('edit_transaksi', id_transaksi=s.id_transaksi) }}" class="btn-edit" title="Edit">
+                                    <i class="fa-solid fa-user-pen"></i>
+                                </a>
+                                <a href="{{ url_for('hapus_transaksi', id_transaksi=s.id_transaksi) }}" class="btn-hapus" title="Hapus" onclick="return confirm('Yakin hapus data ini?')">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td colspan="8">Tidak ada data transaksi.</td></tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    
+        <div class="linkRifqi">
+            <a href="{{ url_for('input_data') }}" class="btn-tambah">
+                <i class="fa-solid fa-file-circle-plus"></i> Tambah Transaksi Baru
+            </a>
+            <a href="/cetaktransaksi" class="btn-cetak"><i class="fa-solid fa-print"></i> Cetak Laporan</a>
+        </div>
+    </center>
+    
+</body>
+</html>

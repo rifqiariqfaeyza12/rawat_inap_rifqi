@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tambah Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_Rifqi.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="formBoxRifqi">
+        <h1>Tambah Transaksi</h1>
+        <form action="/data" method="post">
+            <div class="input-toggle-rifqi">
+                <button type="button" id="btnSelect" class="toggle-btn active" onclick="setMode('select')">Pilih Pasien</button>
+                <button type="button" id="btnManual" class="toggle-btn" onclick="setMode('manual')">Pasien Baru</button>
+            </div>
+
+            <div id="wrapperSelect">
+                <label>Pilih Pasien:</label>
+                <select name="id_pasien" id="id_pasien" required>
+                    <option value="" selected disabled>-- Pilih Pasien --</option>
+                    {%for p in pasien_list %}<option value="{{p.id_pasien}}">{{p.id_pasien}} - {{p.nama}}</option>{%endfor%}
+                </select>
+            </div>
+
+            <div id="wrapperManual" style="display: none;">
+                <label>Nama Pasien Baru:</label>
+                <input type="text" name="nama_manual" id="nama_manual" placeholder="Nama Lengkap">
+                <label>Alamat:</label>
+                <input type="text" name="alamat_manual" placeholder="Alamat Lengkap">
+                <label>Nomor Telepon:</label>
+                <input type="text" name="kontak_manual" placeholder="08xxxxxxxx">
+            </div>
+
+            <label>Kamar:</label>
+            <select name="id_kamar" required>
+                <option selected disabled>-- Pilih Kamar --</option>
+                {%for k in kamar_list %}<option value="{{k.id_kamar}}">{{k.id_kamar}} - {{k.kelas}} - Rp {{k.harga}}</option>{%endfor%}
+            </select>
+
+            <label>Tanggal Masuk:</label>
+            <input type="date" name="tgl_masuk" required>
+            <label>Tanggal Keluar:</label>
+            <input type="date" name="tgl_keluar" required>
+            <label>Status Pembayaran:</label>
+            <select name="status_pembayaran">
+                <option value="Terbayar">Terbayar</option>
+                <option value="Belum Terbayar">Belum Terbayar</option>
+            </select>
+
+            <button type="submit" class="btnRifqi"><i class="fa-solid fa-floppy-disk"></i> Simpan Data</button>
+        </form>
+        <div class="btnbackRifqi" style="margin-top: 15px; text-align: center;">
+            <a href="{{ url_for('datatransaksi') }}"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        </div>
+    </div>
+
+    <script>
+        function setMode(mode) {
+            const wSelect = document.getElementById('wrapperSelect');
+            const wManual = document.getElementById('wrapperManual');
+            const btnS = document.getElementById('btnSelect');
+            const btnM = document.getElementById('btnManual');
+            const inputS = document.getElementById('id_pasien');
+            const inputM = document.getElementById('nama_manual');
+
+            if (mode === 'select') {
+                wSelect.style.display = 'block'; wManual.style.display = 'none';
+                btnS.classList.add('active'); btnM.classList.remove('active');
+                inputS.required = true; inputM.required = false;
+            } else {
+                wSelect.style.display = 'none'; wManual.style.display = 'block';
+                btnM.classList.add('active'); btnS.classList.remove('active');
+                inputS.required = false; inputM.required = true;
+            }
+        }
+    </script>
+</body>
+</html>

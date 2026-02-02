@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_Rifqi.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Database Rawat Inap</title>
+</head>
+<body>
+    
+
+    <center>
+        <h2>Daftar Data Pasien</h2>
+        <div class="container-tabel">
+            <table class="hasilRifqi">
+                <thead>
+                    <tr>
+                        <th>ID Pasien</th>
+                        <th>Nama Pasien</th>
+                        <th>Alamat</th>
+                        <th>Kontak</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in pasien %}
+                    <tr>
+                        <td>{{d.id_pasien}}</td>
+                        <td>{{d.nama}}</td>
+                        <td>{{d.alamat if d.alamat else '-'}}</td>
+                        <td>{{d.kontak if d.kontak else '-'}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+                <a href="/cetak_pasien" class="btn-cetak"><i class="fa-solid fa-print"></i> Cetak Laporan</a>
+                <a href="/" class="btnbackRifqi:hover"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+            </div>
+        </div>
+    </center>
+    
+    
+</body>
+</html>
